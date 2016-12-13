@@ -9,10 +9,10 @@ import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config.babel';
 
 const paths = {
-  allSrcJS: 'src/**/*.js',
+  allSrcJS: 'src/**/*.js?(x)',
   buildDir: 'lib',
   serverBuildDir: 'lib/server',
-  clientEntryPoint: 'src/client/app.js',
+  clientEntryPoint: 'src/client/index.jsx',
   publicJSDir: 'public/js',
   gulpFile: 'gulpfile.babel.js',
   webpackFile: 'webpack.config.babel.js',

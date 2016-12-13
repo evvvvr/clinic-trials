@@ -10,9 +10,15 @@ export default {
         loader: 'babel-loader',
         exclude: [/node_modules/],
       },
+      { test: /\.json$/, loader: 'json-loader' },
     ],
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
+  },
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
   },
 };
