@@ -19,6 +19,8 @@ app.use('/api/v1', v1);
 
 console.log('Starting server...\n');
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Listening on port ${port}\n`);
 });
+
+export default server;

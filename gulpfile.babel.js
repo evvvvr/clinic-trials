@@ -5,6 +5,7 @@ import babel from 'gulp-babel';
 import del from 'del';
 import eslint from 'gulp-eslint';
 import { exec } from 'child_process';
+import mocha from 'gulp-mocha';
 import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config.babel';
 
@@ -12,6 +13,7 @@ const paths = {
   allSrcJS: 'src/**/*.js?(x)',
   buildDir: 'lib',
   serverBuildDir: 'lib/server',
+  serverTestsBuildDir: 'lib/test/server/**/*.js',
   clientEntryPoint: 'src/client/index.jsx',
   publicJSDir: 'public/js',
   gulpFile: 'gulpfile.babel.js',
@@ -48,5 +50,9 @@ gulp.task('run', ['buildClient'], (callback) => {
   server.stdout.pipe(process.stdout);
   server.stderr.pipe(process.stderr);
 });
+
+gulp.task('test-server', ['build'], () =>
+  gulp.src(paths.serverTestsBuildDir).pipe(mocha())
+);
 
 gulp.task('default', ['run']);
