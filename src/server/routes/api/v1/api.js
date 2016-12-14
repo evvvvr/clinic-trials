@@ -9,7 +9,10 @@ api.post('/trials/applications', (request, response) => {
   const validationResult = validateTrialApplication(request.body);
 
   if (!validationResult.valid) {
-    response.status(HttpStatus.BAD_REQUEST).json(validationResult);
+    response.status(HttpStatus.BAD_REQUEST)
+      .json({
+        errors: validationResult.errors,
+      });
   } else {
     response.sendStatus(HttpStatus.CREATED);
   }

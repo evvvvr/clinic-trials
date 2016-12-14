@@ -1,27 +1,33 @@
 const TrialApplication = {
-  id: '/trials/application',
+  id: 'api/v1/trials/application',
   type: 'object',
   properties: {
     gender: {
+      type: 'string',
+      nonEmptyString: true,
       enum: ['female', 'male'],
     },
     firstName: {
       type: 'string',
+      nonEmptyString: true,
       minLength: 1,
       maxLength: 255,
     },
     lastName: {
       type: 'string',
+      nonEmptyString: true,
       minLength: 1,
       maxLength: 255,
     },
     email: {
       type: 'string',
+      nonEmptyString: true,
       format: 'email',
       maxLength: 255,
     },
     phone: {
       type: 'string',
+      nonEmptyString: true,
       pattern: '^\\+?(\\d{7,12})$',
       minLength: 7,
       maxLength: 12,
@@ -33,6 +39,7 @@ const TrialApplication = {
     },
     zip: {
       type: 'string',
+      nonEmptyString: true,
       pattern: '^\\d{3,5}$',
       minLength: 3,
       maxLength: 5,
