@@ -4,6 +4,18 @@ import React from 'react';
 
 import api from '../../api';
 
+const InitialState = {
+  data: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    age: '',
+    zip: '',
+    isTermsAccepted: false,
+  },
+};
+
 function mapFormDataToAPIInput(data) {
   return {
     gender: data.gender,
@@ -24,19 +36,7 @@ class TrialApplicationForm extends React.Component {
     this.onCheckboxChange = this.onCheckboxChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
-    this.state = {
-      data: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        age: '',
-        zip: '',
-        isTermsAccepted: false,
-      },
-      validationResult: {
-      },
-    };
+    this.state = InitialState;
   }
 
   onChange(e) {
