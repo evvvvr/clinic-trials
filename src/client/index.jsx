@@ -7,7 +7,7 @@ import api from './api';
 import App from './components/App';
 
 api.init({
-  URL: `${location.origin}/api`,
+  URL: `${location.origin}/api/v1`,
   timeout: 3000,
 });
 

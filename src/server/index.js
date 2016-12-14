@@ -14,7 +14,6 @@ app.get('*', (request, response) => {
 });
 
 app.use('/api', bodyParser.json());
-app.use('/api', v1);
 app.use('/api/v1', v1);
 
 console.log('Starting server...\n');
