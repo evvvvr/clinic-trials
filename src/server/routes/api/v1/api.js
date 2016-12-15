@@ -3,7 +3,7 @@ import HttpStatus from 'http-status-codes';
 
 import db from '../../../db/models/db';
 import { isErrorUniqueConstraintViolation } from '../../../db/db-utils';
-import validateTrialApplication from './validation/validation';
+import validateTrialApplication from '../../../validation/api/v1/validation';
 
 const api = express.Router();
 
