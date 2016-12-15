@@ -3,23 +3,54 @@ import express from 'express';
 import path from 'path';
 
 import AppDefaults from './AppDefaults';
+import db from './db/models/db';
+import handleError from './middleware/handleError';
 import v1 from './routes/api/v1/api';
+import { checkDBConnection } from './db/db-utils';
 
 const port = process.env.PORT || AppDefaults.Port;
-const app = express();
 
-app.use(express.static('./public'));
-app.get('*', (request, response) => {
-  response.sendFile(path.resolve('./public', 'index.html'));
-});
+function startServer() {
+  const app = express();
 
-app.use('/api', bodyParser.json());
-app.use('/api/v1', v1);
+  app.use(express.static('./public'));
+  app.get('*', (request, response) => {
+    response.sendFile(path.resolve('./public', 'index.html'));
+  });
 
-console.log('Starting server...\n');
+  app.use('/api', bodyParser.json());
+  app.use('/api/v1', v1);
 
-const server = app.listen(port, () => {
-  console.log(`Listening on port ${port}\n`);
-});
+  app.use(handleError);
 
-export default server;
+  console.log('Starting server...\n');
+
+  const server = app.listen(port, () => {
+    console.log(`Listening on port ${port}\n`);
+  });
+
+  return server;
+}
+
+function checkConfig() {
+  const DbURL = process.env.DB_URL;
+
+  if (!DbURL) {
+    return Promise.reject('Please, provide database URL in DB_URL environment variable.');
+  }
+
+  return Promise.resolve({
+    DbURL,
+  });
+}
+
+const serverStart = checkConfig()
+  .then(config => checkDBConnection(config.DbURL))
+  .then(() => db.init())
+  .then(() => startServer())
+  .catch((err) => {
+    console.error(`${err}\n`);
+    process.exit(1);
+  });
+
+export default serverStart;

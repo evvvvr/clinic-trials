@@ -57,9 +57,12 @@
     "express": "^4.14.0",
     "http-status-codes": "^1.0.6",
     "jsonschema": "^1.1.1",
+    "pg": "^6.1.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-router": "^3.0.0",
-    "request": "^2.79.0"
+    "request": "^2.79.0",
+    "sequelize": "^3.27.0",
+    "sequelize-cli": "^2.5.1"
   }
 }

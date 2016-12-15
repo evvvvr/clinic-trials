@@ -45,6 +45,7 @@ class TrialApplicationForm extends React.Component {
     data[e.target.name] = e.target.value;
     this.setState({
       data,
+      errorSubmitting: '',
     });
   }
 
@@ -54,6 +55,7 @@ class TrialApplicationForm extends React.Component {
     data[e.target.name] = e.target.checked;
     this.setState({
       data,
+      errorSubmitting: '',
     });
   }
 
@@ -64,6 +66,10 @@ class TrialApplicationForm extends React.Component {
     api.submitTrialApplication(applicationData, (error, response) => {
       if (!error && response.statusCode === HttpStatus.CREATED) {
         browserHistory.push('/success');
+      } else if (response.statusCode === HttpStatus.CONFLICT) {
+        this.setState({
+          errorSubmitting: 'Sorry, application with this email already exists.',
+        });
       } else {
         this.setState({
           errorSubmitting: 'Sorry, something went wrong while sending your application. Please, try again.',
