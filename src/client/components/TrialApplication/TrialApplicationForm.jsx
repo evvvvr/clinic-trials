@@ -64,9 +64,9 @@ class TrialApplicationForm extends React.Component {
 
     const applicationData = mapFormDataToAPIInput(this.state.data);
     api.submitTrialApplication(applicationData, (error, response) => {
-      if (!error && response.statusCode === HttpStatus.CREATED) {
+      if (!error && response && response.statusCode === HttpStatus.CREATED) {
         browserHistory.push('/success');
-      } else if (response.statusCode === HttpStatus.CONFLICT) {
+      } else if (response && response.statusCode === HttpStatus.CONFLICT) {
         this.setState({
           errorSubmitting: 'Sorry, application with this email already exists.',
         });
@@ -162,7 +162,6 @@ class TrialApplicationForm extends React.Component {
           />
         </div>
         <div>
-          <label htmlFor="isTermsAccepted">I have read and accept terms &amp; conditions</label>
           <input
             type="checkbox"
             name="isTermsAccepted"
@@ -170,6 +169,7 @@ class TrialApplicationForm extends React.Component {
             required
             onChange={this.onCheckboxChange}
           />
+          <label htmlFor="isTermsAccepted">I have read and accept terms &amp; conditions</label>
         </div>
         <div>
           <input type="submit" value="Apply" />

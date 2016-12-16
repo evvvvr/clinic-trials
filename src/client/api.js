@@ -21,10 +21,7 @@ const api = {
         headers: {
           'accept-version': apiConfig.version,
         },
-      }, callback)
-      .on('error', (error) => {
-        callback(error);
-      });
+      }, callback);
   },
 };
 
