@@ -14,21 +14,27 @@ App is conigured using following environment variables:
 ## Building And Running
 
 1. **Clone project source code**
+
   Run `git clone https://github.com/evvvvr/clinical-trials.git <project directory>` command.
 
 2. **Install dependencies**
+
   Run `yarn` command in project directory.
 
 3. **Update database schema**
+
   Run `yarn db-migrate` command in project directory.
   Requires `DB_URL` env variable to be set.
 
 4. **Test REST API**
+
   Run `yarn test-server` command in project directory.
 
 5. **Run Application**
+
   Run `yarn start` command in project directory.
-  App will be available on http://localhost:8080 address by default.
+  App will be available on [http://localhost:8080](http://localhost:8080)
+  address by default.
 
 ## Running Postgres with docker-compose
 
