@@ -147,35 +147,35 @@ describe('Trial Applications API', () => {
           done();
         });
     });
-  });
 
-  it('It should reject applications with existing email', (done) => {
-    const application = {
-      gender: 'female',
-      firstName: 'Jill',
-      lastName: 'Doe',
-      email: 'jill@doe.com',
-      phone: '+5432167',
-      age: 22,
-      zip: '111',
-    };
+    it('It should reject applications with existing email', (done) => {
+      const application = {
+        gender: 'female',
+        firstName: 'Jill',
+        lastName: 'Doe',
+        email: 'jill@doe.com',
+        phone: '+5432167',
+        age: 22,
+        zip: '111',
+      };
 
-    chai.request(server)
-      .post(ApiUrl)
-      .set('accept-version', ApiVersion)
-      .send(application)
-      .end((err, res) => {
-        res.should.have.status(HttpStatus.CREATED);
+      chai.request(server)
+        .post(ApiUrl)
+        .set('accept-version', ApiVersion)
+        .send(application)
+        .end((err, res) => {
+          res.should.have.status(HttpStatus.CREATED);
 
-        chai.request(server)
-          .post(ApiUrl)
-          .set('accept-version', ApiVersion)
-          .send(application)
-          .end((secondError, secondResponse) => {
-            secondResponse.should.have.status(HttpStatus.CONFLICT);
+          chai.request(server)
+            .post(ApiUrl)
+            .set('accept-version', ApiVersion)
+            .send(application)
+            .end((secondError, secondResponse) => {
+              secondResponse.should.have.status(HttpStatus.CONFLICT);
 
-            done();
-          });
-      });
+              done();
+            });
+        });
+    });
   });
 });
