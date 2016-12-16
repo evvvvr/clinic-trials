@@ -35,30 +35,31 @@ App is conigured using following environment variables:
 To use docker-compose for running Postgres server:
 
 1. Create 'docker-compose.yml' file with following content:
-```
-version: '2'
 
-volumes:
-  postgres-data:
-    driver: local
+  ```yml
+  version: '2'
 
-services:
-  postgres:
-    image: postgres:9.6.1
-    ports:
-      - 5432:5432
-    expose:
-      - 5432
-    volumes:
-      - ./db/dumps:/db/dumps
-      - ./tmp:/tmp
-      - ./bin/restoredb:/bin/restoredb:ro
-      - ./bin/dumpdb:/bin/dumpdb:ro
-      - postgres-data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-```
+  volumes:
+    postgres-data:
+      driver: local
+
+  services:
+    postgres:
+      image: postgres:9.6.1
+      ports:
+        - 5432:5432
+      expose:
+        - 5432
+      volumes:
+        - ./db/dumps:/db/dumps
+        - ./tmp:/tmp
+        - ./bin/restoredb:/bin/restoredb:ro
+        - ./bin/dumpdb:/bin/dumpdb:ro
+        - postgres-data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+  ```
 
 2. Run `docker-compose up` command in same directory with `docker-compose.yml` to start
 Postgres container.
