@@ -59,6 +59,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 ```
+
 2. Run `docker-compose up` command in same directory with `docker-compose.yml` to start
 Postgres container.
 
