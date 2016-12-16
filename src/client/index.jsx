@@ -3,6 +3,11 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
+import '../../node_modules/normalize-css/normalize.css';
+import './styles/app.less';
+/* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
+
 import api from './api';
 import App from './components/App';
 

@@ -10,7 +10,18 @@ export default {
         loader: 'babel-loader',
         exclude: [/node_modules/],
       },
-      { test: /\.json$/, loader: 'json-loader' },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+      },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader',
+      },
     ],
   },
   resolve: {

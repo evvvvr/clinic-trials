@@ -81,16 +81,22 @@ class TrialApplicationForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <div>
-          <label htmlFor="gender">Gender</label>
-          <select name="gender" value={this.state.data.gender} required onChange={this.onChange}>
+        <div className="applicationForm__section">
+          <label htmlFor="gender" className="applicationForm__inputCaption">Gender</label>
+          <select
+            name="gender"
+            value={this.state.data.gender}
+            required
+            className="applicationForm__input"
+            onChange={this.onChange}
+          >
             <option value="" />
             <option value="female">Female</option>
             <option value="male">Male</option>
           </select>
         </div>
-        <div>
-          <label htmlFor="firstName">First Name</label>
+        <div className="applicationForm__section">
+          <label htmlFor="firstName" className="applicationForm__inputCaption">First Name</label>
           <input
             type="text"
             name="firstName"
@@ -99,11 +105,13 @@ class TrialApplicationForm extends React.Component {
             pattern="^\S(.*\S)?$"
             title="Should not contain leading and trailing spaces and
              more than one space in-beetwen characters"
+            maxLength="255"
+            className="applicationForm__input"
             onChange={this.onChange}
           />
         </div>
-        <div>
-          <label htmlFor="lastName">Last Name</label>
+        <div className="applicationForm__section">
+          <label htmlFor="lastName" className="applicationForm__inputCaption">Last Name</label>
           <input
             type="text"
             name="lastName"
@@ -112,21 +120,25 @@ class TrialApplicationForm extends React.Component {
             pattern="^\S(.*\S)?$"
             title="Should not contain leading and trailing spaces and
              more than one space in-beetwen characters"
+            maxLength="255"
+            className="applicationForm__input"
             onChange={this.onChange}
           />
         </div>
-        <div>
-          <label htmlFor="email">Email</label>
+        <div className="applicationForm__section">
+          <label htmlFor="email" className="applicationForm__inputCaption">Email</label>
           <input
             type="email"
             name="email"
             value={this.state.data.email}
             required
+            maxLength="255"
+            className="applicationForm__input"
             onChange={this.onChange}
           />
         </div>
-        <div>
-          <label htmlFor="phone">Phone</label>
+        <div className="applicationForm__section">
+          <label htmlFor="phone" className="applicationForm__inputCaption">Phone</label>
           <input
             type="text"
             name="phone"
@@ -134,11 +146,14 @@ class TrialApplicationForm extends React.Component {
             required
             pattern="^\+?(\d){7,12}$"
             title="Must be from 7 to 12 digits, optionally starting with a '+'"
+            size="13"
+            maxLength="13"
+            className="applicationForm__input"
             onChange={this.onChange}
           />
         </div>
-        <div>
-          <label htmlFor="age">Age</label>
+        <div className="applicationForm__section">
+          <label htmlFor="age" className="applicationForm__inputCaption">Age</label>
           <input
             type="number"
             name="age"
@@ -146,11 +161,12 @@ class TrialApplicationForm extends React.Component {
             max="99"
             value={this.state.data.age}
             required
+            className="applicationForm__input"
             onChange={this.onChange}
           />
         </div>
-        <div>
-          <label htmlFor="zip">ZIP</label>
+        <div className="applicationForm__section">
+          <label htmlFor="zip" className="applicationForm__inputCaption">ZIP</label>
           <input
             type="text"
             name="zip"
@@ -159,9 +175,12 @@ class TrialApplicationForm extends React.Component {
             pattern="^(\d){3,5}$"
             title="Must be from 3 to 5 digits"
             onChange={this.onChange}
+            size="5"
+            maxLength="5"
+            className="applicationForm__input"
           />
         </div>
-        <div>
+        <div className="applicationForm__section">
           <input
             type="checkbox"
             name="isTermsAccepted"
@@ -169,11 +188,16 @@ class TrialApplicationForm extends React.Component {
             required
             onChange={this.onCheckboxChange}
           />
-          <label htmlFor="isTermsAccepted">I have read and accept terms &amp; conditions</label>
+          <label
+            htmlFor="isTermsAccepted"
+            className="applicationForm__checkboxCaption"
+          >
+            I have read and accept terms &amp; conditions
+          </label>
         </div>
-        <div>
-          <input type="submit" value="Apply" />
-          <div>
+        <div className="applicationForm__submitSection">
+          <input type="submit" value="Apply" className="applicationForm__submitButton" />
+          <div className="applicationForm__submissionError">
             {this.state.errorSubmitting}
           </div>
         </div>
