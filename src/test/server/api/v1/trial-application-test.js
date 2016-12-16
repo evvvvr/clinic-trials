@@ -13,7 +13,8 @@ chai.should();
 chai.use(chaiHttp);
 chai.use(chaiThings);
 
-const ApiUrl = '/api/v1/trials/applications';
+const ApiUrl = '/api/trials/applications';
+const ApiVersion = '1.0';
 let server;
 
 describe('Trial Applications API', () => {
@@ -34,9 +35,33 @@ describe('Trial Applications API', () => {
       .then(() => done());
     });
 
+    it('It should reject request without API version', (done) => {
+      chai.request(server)
+        .post(ApiUrl)
+        .send({})
+        .end((err, res) => {
+          res.should.have.status(HttpStatus.NOT_FOUND);
+
+          done();
+        });
+    });
+
+    it('It should reject request with wrong API version', (done) => {
+      chai.request(server)
+        .post(ApiUrl)
+        .set('accept-version', '2.0')
+        .send({})
+        .end((err, res) => {
+          res.should.have.status(HttpStatus.NOT_FOUND);
+
+          done();
+        });
+    });
+
     it('It should reject empty object', (done) => {
       chai.request(server)
         .post(ApiUrl)
+        .set('accept-version', ApiVersion)
         .send({})
         .end((err, res) => {
           res.should.have.status(HttpStatus.BAD_REQUEST);
@@ -48,6 +73,7 @@ describe('Trial Applications API', () => {
     it('It should reject application with incorrect phone', (done) => {
       chai.request(server)
         .post(ApiUrl)
+        .set('accept-version', ApiVersion)
         .send({
           gender: 'female',
           firstName: 'Jane',
@@ -75,6 +101,7 @@ describe('Trial Applications API', () => {
     it('It should reject application with no gender specified', (done) => {
       chai.request(server)
         .post(ApiUrl)
+        .set('accept-version', ApiVersion)
         .send({
           firstName: 'Jane',
           lastName: 'Doe',
@@ -101,6 +128,7 @@ describe('Trial Applications API', () => {
     it('It should create application with well-formed data', (done) => {
       chai.request(server)
         .post(ApiUrl)
+        .set('accept-version', ApiVersion)
         .send({
           gender: 'female',
           firstName: 'Jane',
@@ -134,12 +162,14 @@ describe('Trial Applications API', () => {
 
     chai.request(server)
       .post(ApiUrl)
+      .set('accept-version', ApiVersion)
       .send(application)
       .end((err, res) => {
         res.should.have.status(HttpStatus.CREATED);
 
         chai.request(server)
           .post(ApiUrl)
+          .set('accept-version', ApiVersion)
           .send(application)
           .end((secondError, secondResponse) => {
             secondResponse.should.have.status(HttpStatus.CONFLICT);

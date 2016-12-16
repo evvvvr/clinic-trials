@@ -7,7 +7,7 @@ import path from 'path';
 import AppDefaults from './AppDefaults';
 import db from './db/models/db';
 import handleError from './middleware/handleError';
-import v1 from './routes/api/v1/api';
+import api from './routes/api';
 import { checkDBConnection } from './db/db-utils';
 
 const port = process.env.PORT || AppDefaults.Port;
@@ -21,7 +21,7 @@ function startServer() {
   });
 
   app.use('/api', bodyParser.json());
-  app.use('/api/v1', v1);
+  app.use('/api', api);
 
   app.use(handleError);
 

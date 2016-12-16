@@ -1,13 +1,10 @@
-import express from 'express';
 import HttpStatus from 'http-status-codes';
 
 import db from '../../../db/models/db';
-import { isErrorUniqueConstraintViolation } from '../../../db/db-utils';
 import validateTrialApplication from '../../../validation/api/v1/validation';
+import { isErrorUniqueConstraintViolation } from '../../../db/db-utils';
 
-const api = express.Router();
-
-api.post('/trials/applications', (request, response, next) => {
+function postTrialsApplication(request, response, next) {
   const validationResult = validateTrialApplication(request.body);
 
   if (!validationResult.valid) {
@@ -34,6 +31,6 @@ api.post('/trials/applications', (request, response, next) => {
         }
       });
   }
-});
+}
 
-export default api;
+export default postTrialsApplication;
