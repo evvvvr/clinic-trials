@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "gulp",
+    "db-migrate": "node_modules/.bin/sequelize db:migrate",
     "test-server": "gulp test-server"
   },
   "devDependencies": {
