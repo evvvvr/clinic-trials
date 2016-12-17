@@ -1,5 +1,6 @@
-@color-lightGray: rgb(211,211,211);
-@color-black: rgb(0,0,0);
+@color-btnBackground: rgb(211,211,211);
+@color-inputBorder: rgb(0,0,0);
+@color-error: rgb(255,0,0);
 
 @indentation-large: 0.75em;
 @indentation-big: 0.5em;
@@ -25,7 +26,7 @@
     }
 
     &__input {
-      border: @border-small solid @color-black;
+      border: @border-small solid @color-inputBorder;
     }
 
     &__checkboxCaption {
@@ -38,13 +39,13 @@
 
     &__submitButton {
       border: 0;
-      background: @color-lightGray;
+      background: @color-btnBackground;
       box-shadow: none;
       border-radius: 0px;
     }
 
     &__submissionError {
       margin-top: @indentation-large;
-      color: red;
+      color: @color-error;
     }
 }
