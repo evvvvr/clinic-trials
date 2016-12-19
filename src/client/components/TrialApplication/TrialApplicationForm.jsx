@@ -62,6 +62,10 @@ class TrialApplicationForm extends React.Component {
   onSubmit(e) {
     e.preventDefault();
 
+    this.setState({
+      isSubmitting: true,
+    });
+
     const applicationData = mapFormDataToAPIInput(this.state.data);
     api.submitTrialApplication(applicationData, (error, response) => {
       if (!error && response && response.statusCode === HttpStatus.CREATED) {
@@ -69,16 +73,20 @@ class TrialApplicationForm extends React.Component {
       } else if (response && response.statusCode === HttpStatus.CONFLICT) {
         this.setState({
           errorSubmitting: 'Sorry, application with this email already exists.',
+          isSubmitting: false,
         });
       } else {
         this.setState({
           errorSubmitting: 'Sorry, something went wrong while sending your application. Please, try again.',
+          isSubmitting: false,
         });
       }
     });
   }
 
   render() {
+    const submitBtnText = this.state.isSubmitting ? 'Submitting...' : 'Apply';
+
     return (
       <form onSubmit={this.onSubmit}>
         <div className="applicationForm__section">
@@ -196,7 +204,12 @@ class TrialApplicationForm extends React.Component {
           </label>
         </div>
         <div className="applicationForm__submitSection">
-          <input type="submit" value="Apply" className="applicationForm__submitButton" />
+          <input
+            type="submit"
+            value={submitBtnText}
+            disabled={this.state.isSubmitting}
+            className="applicationForm__submitButton"
+          />
           <div className="applicationForm__submissionError">
             {this.state.errorSubmitting}
           </div>
